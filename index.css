@@ -1,0 +1,65 @@
+/* stylelint-disable at-rule-no-unknown */
+/* Allow Tailwind directives (handled by PostCSS+Tailwind at build time) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Project base styles built on top of Tailwind's reset. */
+@layer base {
+	:root {
+		--bg-gradient-1: rgba(99,102,241,0.06); /* indigo-ish */
+		--bg-gradient-2: rgba(59,130,246,0.04); /* blue-ish */
+	}
+
+	html, body, #root {
+		height: 100%;
+	}
+
+		body {
+			/* Explicit properties instead of @apply to satisfy linters */
+			background-color: #0f172a; /* Tailwind slate-900 */
+			color: #f1f5f9; /* Tailwind slate-100 */
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+			/* subtle layered radial highlights for depth */
+			background-image: radial-gradient(circle at 10% 10%, var(--bg-gradient-1), transparent 8%),
+												radial-gradient(circle at 90% 90%, var(--bg-gradient-2), transparent 10%);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		} 
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	/* Small accessible focus ring for keyboard users */
+	:focus {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(99,102,241,0.18);
+		border-radius: 4px;
+	}
+}
+
+/* Small reusable component utilities */
+@layer components {
+		.app-container {
+			max-width: 48rem; /* Tailwind max-w-3xl */
+			margin-left: auto;
+			margin-right: auto;
+			padding-left: 1.5rem; /* px-6 */
+			padding-right: 1.5rem;
+			padding-top: 2rem; /* py-8 */
+			padding-bottom: 2rem;
+		}
+
+		.card {
+			background-color: rgba(31,41,55,0.6); /* slate-800 at 60% */
+			backdrop-filter: blur(4px); /* approximate backdrop-blur-sm */
+			border-radius: 0.5rem; /* rounded-lg */
+			box-shadow: 0 10px 15px rgba(2,6,23,0.6);
+			padding: 1.5rem; /* p-6 */
+		}
+}
